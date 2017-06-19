@@ -11,10 +11,28 @@ module.exports = class extends Generator {
     ));
 
     const prompts = [{
+      type: 'input',
+      name: 'name',
+      message: 'Now, tell me. What do you want to name your future prodigy?'
+    }, {
       type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
+      name: 'relay',
+      message: 'Do you want to wrap your prodigy in a container(Relay)?',
+      default: false
+    }, {
+      type: 'list',
+      name: 'styleSheets',
+      message: 'How do you want to style your component / container',
+      choices: [
+        'css',
+        'scss'
+      ],
+      default: 'css'
+    }, {
+      type: 'input',
+      name: 'location',
+      message: 'Where do you want to place your component directory?',
+      default: 'src/components/'
     }];
 
     return this.prompt(prompts).then(props => {
@@ -24,7 +42,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('dummyfile.txt'),
       this.destinationPath('dummyfile.txt')
     );
