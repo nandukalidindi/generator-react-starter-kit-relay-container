@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Nandu Kalidindi",
+      "authorEmail": "nandukalidindi@gmail.com",
+      "authorUrl": "https://nandukalidindi.github.io"
+    }
+  }
+}
