@@ -36,19 +36,28 @@ module.exports = class extends Generator {
     }];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     });
   }
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('MyComponent.js'),
+      this.destinationPath(this.props.location + this.props.name + '.js')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('MyComponent.' + this.props.styleSheets),
+      this.destinationPath(this.props.location + this.props.name + '.' + this.props.styleSheets)
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath(this.props.location + 'package.json')
     );
   }
 
-  install() {
-    this.installDependencies();
-  }
+  // install() {
+  //   this.installDependencies();
+  // }
 };
