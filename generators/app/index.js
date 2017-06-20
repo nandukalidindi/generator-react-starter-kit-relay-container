@@ -31,7 +31,7 @@ module.exports = class extends Generator {
     }, {
       type: 'input',
       name: 'location',
-      message: 'Where do you want to place your component directory?',
+      message: 'Where do you want to place your component?',
       default: 'src/components/'
     }];
 
@@ -43,17 +43,19 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copyTpl(
       this.templatePath('MyComponent.js'),
-      this.destinationPath(this.props.location + this.props.name + '.js')
+      this.destinationPath(this.props.location + this.props.name + '/' + this.props.name + '.js'),
+      {name: this.props.name, styleSheets: this.props.styleSheets, relay: this.props.relay}
     );
 
     this.fs.copyTpl(
       this.templatePath('MyComponent.' + this.props.styleSheets),
-      this.destinationPath(this.props.location + this.props.name + '.' + this.props.styleSheets)
+      this.destinationPath(this.props.location + this.props.name + '/' + this.props.name + '.' + this.props.styleSheets)
     );
 
     this.fs.copyTpl(
       this.templatePath('package.json'),
-      this.destinationPath(this.props.location + 'package.json')
+      this.destinationPath(this.props.location + this.props.name + '/' + 'package.json'),
+      {name: this.props.name}
     );
   }
 
