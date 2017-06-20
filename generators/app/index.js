@@ -13,11 +13,11 @@ module.exports = class extends Generator {
     const prompts = [{
       type: 'input',
       name: 'name',
-      message: 'Now, tell me. What do you want to name your future prodigy?'
+      message: 'Name of the component'
     }, {
       type: 'confirm',
       name: 'relay',
-      message: 'Do you want to wrap your prodigy in a container(Relay)?',
+      message: 'Do you want to wrap your component in a container(Relay)?',
       default: false
     }, {
       type: 'list',
@@ -28,6 +28,11 @@ module.exports = class extends Generator {
         'scss'
       ],
       default: 'css'
+    }, {
+      type: 'confirm',
+      name: 'lifecycleHooks',
+      message: 'Do you want all the life cycle hooks stubbed in your component?',
+      default: false
     }, {
       type: 'input',
       name: 'location',
@@ -44,7 +49,12 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('MyComponent.js'),
       this.destinationPath(this.props.location + this.props.name + '/' + this.props.name + '.js'),
-      {name: this.props.name, styleSheets: this.props.styleSheets, relay: this.props.relay}
+      {
+        name: this.props.name,
+        relay: this.props.relay,
+        styleSheets: this.props.styleSheets,
+        lifecycleHooks: this.props.lifecycleHooks
+      }
     );
 
     this.fs.copyTpl(
