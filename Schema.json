@@ -1,0 +1,24 @@
+{
+  "Type" : "AWS::Table",
+  "Properties" : {
+    "AttributeDefinitions" : [
+      
+        {
+          "AttributeName": "ID",
+          "AttributeType": "Bigint"
+        }
+      
+        {
+          "AttributeName": "Email",
+          "AttributeType": "String"
+        }
+      
+        {
+          "AttributeName": "Password",
+          "AttributeType": "Text"
+        }
+      
+    ],
+    "TableName" : "User"
+  }
+}

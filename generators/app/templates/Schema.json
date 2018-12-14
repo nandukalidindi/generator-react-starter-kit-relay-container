@@ -1,0 +1,14 @@
+{
+  "Type" : "AWS::Table",
+  "Properties" : {
+    "AttributeDefinitions" : [
+      <% for (let i=0; i<columns.length; i++) { %>
+        {
+          "AttributeName": "<%= columns[i].attributeName %>",
+          "AttributeType": "<%= columns[i].attributeType %>"
+        }
+      <% } %>
+    ],
+    "TableName" : "<%= (columns[0] || {}).name %>"
+  }
+}
